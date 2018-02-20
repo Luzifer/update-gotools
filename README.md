@@ -1,3 +1,8 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/Luzifer/update-gotools)](https://goreportcard.com/report/github.com/Luzifer/update-gotools)
+![](https://badges.fyi/github/license/Luzifer/update-gotools)
+![](https://badges.fyi/github/downloads/Luzifer/update-gotools)
+![](https://badges.fyi/github/latest-release/Luzifer/update-gotools)
+
 # luzifer / update-gotools
 
 This program is a successor of my `update-gotools` script to have a working environment set up with tools compiles from Go.
