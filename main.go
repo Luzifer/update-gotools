@@ -40,8 +40,7 @@ var (
 )
 
 func init() {
-	var err error
-	if err = rconfig.Parse(&cfg); err != nil {
+	if err := rconfig.Parse(&cfg); err != nil {
 		log.WithError(err).Fatal("Unable to parse commandline options")
 	}
 
@@ -56,6 +55,7 @@ func init() {
 		os.Exit(0)
 	}
 
+	var err error
 	if cfg.Config, err = homedir.Expand(cfg.Config); err != nil {
 		log.WithError(err).Fatal("Unable to expand config path")
 	}
