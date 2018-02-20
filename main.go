@@ -13,20 +13,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type pkgCfg struct {
-	Name    string `yaml:"name"`
-	Single  bool   `yaml:"single"`
-	Version string `yaml:"version"`
-}
-
-type configFile struct {
-	Cwd          string     `yaml:"cwd"`
-	GoPath       string     `yaml:"gopath"`
-	Packages     []pkgCfg   `yaml:"packages"`
-	PreCommands  [][]string `yaml:"pre_commands"`
-	PostCommands [][]string `yaml:"post_commands"`
-}
-
 var (
 	cfg = struct {
 		Config         string `flag:"config,c" default:"~/.config/gotools.yml" description:"Configuration for update-gotools utility"`
@@ -109,7 +95,13 @@ func runPackageBuilds(n int, filter func(pkgCfg) bool) {
 
 		limit.Add()
 		go func(pkg pkgCfg) {
-			logVer := pkg.Version
+			logVer, err := pkg.Version()
+			if err != nil {
+				log.WithFields(log.Fields{
+					"pkg": pkg.Name,
+				}).WithError(err).Fatal("Unable to fetch version information")
+			}
+
 			if logVer == "" {
 				logVer = "HEAD"
 			}

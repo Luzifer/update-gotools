@@ -53,17 +53,22 @@ func executePackage(pkg pkgCfg, pkgLog *log.Entry) error {
 		return err
 	}
 
-	if !str.StringInSlice(pkg.Version, []string{"", "master"}) {
+	ver, err := pkg.Version()
+	if err != nil {
+		return err
+	}
+
+	if !str.StringInSlice(ver, []string{"", "master"}) {
 		pkgLog.Debug("Resetting to specified version")
 		pkgPath := path.Join(os.Getenv("GOPATH"), "src", pkg.Name)
 
 		// Fetch required references
-		if err := executeCommand([]string{"git", "fetch", "-q", "--tags", "origin", pkg.Version}, stdout, stderr, pkgPath); err != nil {
+		if err := executeCommand([]string{"git", "fetch", "-q", "--tags", "origin", ver}, stdout, stderr, pkgPath); err != nil {
 			return err
 		}
 
 		// Do the real reset
-		if err := executeCommand([]string{"git", "reset", "--hard", pkg.Version}, stdout, stderr, pkgPath); err != nil {
+		if err := executeCommand([]string{"git", "reset", "--hard", ver}, stdout, stderr, pkgPath); err != nil {
 			return err
 		}
 	}
