@@ -69,8 +69,13 @@ func main() {
 		"num_cpu": runtime.NumCPU(),
 	}).Debugf("update-gotools started")
 
+	parallelRunners := runtime.NumCPU() - 1
+	if parallelRunners < 1 {
+		parallelRunners = 1
+	}
+
 	runPreCommands()
-	runPackageBuilds(runtime.NumCPU()-1, func(pkg pkgCfg) bool { return !pkg.Single })
+	runPackageBuilds(parallelRunners, func(pkg pkgCfg) bool { return !pkg.Single })
 	runPackageBuilds(1, func(pkg pkgCfg) bool { return pkg.Single })
 	runPostCommands()
 
