@@ -3,6 +3,11 @@ package main
 import (
 	"io/ioutil"
 	"net/http"
+	"os"
+
+	homedir "github.com/mitchellh/go-homedir"
+
+	yaml "gopkg.in/yaml.v2"
 )
 
 type pkgCfg struct {
@@ -18,6 +23,28 @@ type configFile struct {
 	Packages     []pkgCfg   `yaml:"packages"`
 	PreCommands  [][]string `yaml:"pre_commands"`
 	PostCommands [][]string `yaml:"post_commands"`
+}
+
+func (c *configFile) LoadFromPath(filepath string) error {
+	r, err := os.Open(filepath)
+	if err != nil {
+		return err
+	}
+	defer r.Close()
+
+	if err := yaml.NewDecoder(r).Decode(cfgFile); err != nil {
+		return err
+	}
+
+	if c.Cwd, err = homedir.Expand(c.Cwd); err != nil {
+		return err
+	}
+
+	if c.GoPath, err = homedir.Expand(c.GoPath); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (p *pkgCfg) Version() (string, error) {

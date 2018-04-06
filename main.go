@@ -2,11 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"runtime"
-
-	yaml "gopkg.in/yaml.v2"
 
 	"github.com/Luzifer/rconfig"
 	homedir "github.com/mitchellh/go-homedir"
@@ -55,12 +52,7 @@ func main() {
 		log.WithError(err).Fatal("Unable to create default config")
 	}
 
-	cfgFileRaw, err := ioutil.ReadFile(cfg.Config)
-	if err != nil {
-		log.WithError(err).Fatal("Unable to read config")
-	}
-
-	if err := yaml.Unmarshal(cfgFileRaw, cfgFile); err != nil {
+	if err := cfgFile.LoadFromPath(cfg.Config); err != nil {
 		log.WithError(err).Fatal("Unable to parse config file")
 	}
 
