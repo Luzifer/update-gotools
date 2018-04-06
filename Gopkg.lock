@@ -4,8 +4,8 @@
 [[projects]]
   name = "github.com/Luzifer/go_helpers"
   packages = ["str"]
-  revision = "8fdddb7041fe962e750caa553a0714f94e261c4a"
-  version = "v2.3.1"
+  revision = "15199b8e33ca5558e8c58af7924083983eb63ca4"
+  version = "v2.4.0"
 
 [[projects]]
   name = "github.com/Luzifer/rconfig"
@@ -22,8 +22,8 @@
 [[projects]]
   name = "github.com/sirupsen/logrus"
   packages = ["."]
-  revision = "d682213848ed68c0a260ca37d6dd5ace8423f5ba"
-  version = "v1.0.4"
+  revision = "c155da19408a8799da419ed3eeb0cb5db0ad5dbc"
+  version = "v1.0.5"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -35,7 +35,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "432090b8f568c018896cd8a0fb0345872bbac6ce"
+  revision = "b2aa35443fbc700ab74c586ae79b81c171851023"
 
 [[projects]]
   branch = "master"
@@ -44,7 +44,7 @@
     "unix",
     "windows"
   ]
-  revision = "37707fdb30a5b38865cfb95e5aab41707daec7fd"
+  revision = "1d206c9fa8975fb4cf00df1dc8bf3283dc24ba0e"
 
 [[projects]]
   branch = "v2"
@@ -53,14 +53,14 @@
   revision = "59c90c7046f643cbe0d4e7c8776c42a84ce75910"
 
 [[projects]]
-  branch = "v2"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
-  revision = "d670f9405373e636a5a2765eea47fac0c9bc91a4"
+  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
+  version = "v2.2.1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "88cfcda13c03d0ebf680bd88d4b3e5f38ecd88ba409af26ca47d212695657fcd"
+  inputs-digest = "b352e000c772823e4b785375e85d16f11c0a5950aeae2cfdbb0cac59be4ab4ac"
   solver-name = "gps-cdcl"
   solver-version = 1
