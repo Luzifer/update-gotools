@@ -1,3 +1,7 @@
+# 0.2.1 / 2018-04-06
+
+  * Fix: Unmarshal in local object
+
 # 0.2.0 / 2018-04-06
 
   * Add homdir expansion for paths
