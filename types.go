@@ -32,7 +32,7 @@ func (c *configFile) LoadFromPath(filepath string) error {
 	}
 	defer r.Close()
 
-	if err := yaml.NewDecoder(r).Decode(cfgFile); err != nil {
+	if err := yaml.NewDecoder(r).Decode(c); err != nil {
 		return err
 	}
 
