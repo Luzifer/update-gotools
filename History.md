@@ -1,3 +1,7 @@
+# 0.2.0 / 2018-04-06
+
+  * Add homdir expansion for paths
+
 # 0.1.2 / 2018-02-21
 
   * Fix: Ensure the tool works on VMs with 1 CPU
