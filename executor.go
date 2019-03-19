@@ -5,10 +5,11 @@ import (
 	"os"
 	"os/exec"
 	"path"
-	"strings"
 
-	"github.com/Luzifer/go_helpers/str"
 	log "github.com/sirupsen/logrus"
+
+	"github.com/Luzifer/go_helpers/env"
+	"github.com/Luzifer/go_helpers/str"
 )
 
 func executeCommands(logEntry *log.Entry, commands [][]string) error {
@@ -27,14 +28,12 @@ func executeCommands(logEntry *log.Entry, commands [][]string) error {
 }
 
 func executeCommand(command []string, stdout, stderr io.Writer, cwd string) error {
-	env := []string{
-		strings.Join([]string{"GOPATH", cfgFile.GoPath}, "="),
-		strings.Join([]string{"PATH", os.Getenv("PATH")}, "="),
-	}
+	e := env.ListToMap(os.Environ())
+	e["GOPATH"] = cfgFile.GoPath
 
 	cmd := exec.Command(command[0], command[1:]...)
 	cmd.Dir = cwd
-	cmd.Env = env
+	cmd.Env = env.MapToList(e)
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
 	return cmd.Run()
